@@ -12,6 +12,9 @@ DEVICE_PATH := device/oneplus/lemonadep
 # Properties
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
+# HIDL
+#DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
+
 # Recovery
 TARGET_SCREEN_DENSITY := 420
 TARGET_RECOVERY_DENSITY := xxhdpi
@@ -26,3 +29,4 @@ BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 
 TARGET_NO_RECOVERY := true
 ALLOW_MISSING_DEPENDENCIES := true
+

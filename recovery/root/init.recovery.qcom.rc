@@ -33,6 +33,7 @@ on init
     # checker programs.
     mkdir /dev/fscklogs 0770 root system
     exec u:r:recovery:s0 -- /system/bin/load-mod.sh
+    exec u:r:recovery:s0 -- /system/bin/fix-invalid-vintf-manifest.sh
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -64,7 +65,7 @@ on boot
 on property:twrp.modules.loaded=true
     # Create a delay to prevent "deadlock," where services and libs are loaded from ROMs vendor partition,
     # which can't be unmounted. This results in massive lags introduced by the vibrator service.
-    wait /sys/class/leds/vibrator/wait_dummy 4
+    wait /sys/class/leds/vibrator/wait_dummy 3
 
     wait /sys/class/leds/vibrator/ram_update 1
     write /sys/class/leds/vibrator/ram_update 1
@@ -75,6 +76,7 @@ on property:twrp.modules.loaded=true
     chown system system /sys/class/leds/vibrator/vmax
     chown system system /sys/class/leds/vibrator/waveform_index
     chown system system /sys/class/leds/vibrator/rtp
+    chown system system /sys/class/leds/vibrator/brightness
     start vendor.qti.vibrator
 
     # Load ADSP firmware for PMIC

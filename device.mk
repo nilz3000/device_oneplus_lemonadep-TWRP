@@ -68,9 +68,11 @@ TW_BRIGHTNESS_PATH := /sys/class/backlight/panel0-backlight/brightness
 TW_DEFAULT_BRIGHTNESS := 1500
 TW_MAX_BRIGHTNESS := 4095
 
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
+TW_SKIP_ADDITIONAL_FSTAB := true
 
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+
+#TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko oplus_chg.ko touchscreen.ko haptic.ko"
 TW_LOAD_VENDOR_MODULES := "aw8697.ko adsp_loader_dlkm.ko oplus_chg.ko touchscreen.ko haptic.ko"
 
 #Properties
@@ -80,19 +82,31 @@ TW_OVERRIDE_SYSTEM_PROPS := \
 TARGET_RECOVERY_DEVICE_MODULES += libion \
     device_manifest.xml \
     system_manifest.xml \
+    vendor.display.config@1.0 \
     vendor.display.config@2.0.vendor \
     libdisplayconfig.qti \
-    vendor.qti.hardware.vibrator.service.oplus \
-    libdrm.vendor
+    android.hidl.allocator@1.0 \
+    android.hidl.memory@1.0 \
+    android.hidl.memory.token@1.0 \
+    libhidlmemory \
+    libdrm.vendor \
+    vendor.qti.hardware.vibrator.service.oplus
+
 
 RECOVERY_BINARY_SOURCE_FILES += \
     $(TARGET_OUT_VENDOR_EXECUTABLES)/hw/vendor.qti.hardware.vibrator.service.oplus
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
-    $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/vendor.qti.hardware.vibrator.impl.oplus.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
     $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/vendor.display.config@2.0.so \
-    $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libdrm.so
+    $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/libdrm.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.allocator@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory.token@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libhidlmemory.so \
+    $(TARGET_OUT_VENDOR_SHARED_LIBRARIES)/vendor.qti.hardware.vibrator.impl.oplus.so
+
 
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/excluded-input-devices.xml \
