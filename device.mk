@@ -69,7 +69,6 @@ TW_DEFAULT_BRIGHTNESS := 1500
 TW_MAX_BRIGHTNESS := 4095
 
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 TW_LOAD_VENDOR_MODULES := "aw8697.ko adsp_loader_dlkm.ko oplus_chg.ko touchscreen.ko haptic.ko"
 
